@@ -296,6 +296,7 @@ public class SpringFactoriesLoader {
 	 * @see #forDefaultResourceLocation()
 	 */
 	public static SpringFactoriesLoader forDefaultResourceLocation(@Nullable ClassLoader classLoader) {
+		// 感觉这里SpringBoot的'约定大于配置'就体现出来了,固定去加载(META-INF/spring.factories)这个位置的配置文件中的各种初始化器
 		return forResourceLocation(FACTORIES_RESOURCE_LOCATION, classLoader);
 	}
 
