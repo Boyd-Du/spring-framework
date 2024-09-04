@@ -198,16 +198,18 @@ public abstract class ClassUtils {
 	}
 
 	/**
-	 * Return the default ClassLoader to use: typically the thread context
-	 * ClassLoader, if available; the ClassLoader that loaded the ClassUtils
-	 * class will be used as fallback.
-	 * <p>Call this method if you intend to use the thread context ClassLoader
-	 * in a scenario where you clearly prefer a non-null ClassLoader reference:
-	 * for example, for class path resource loading (but not necessarily for
-	 * {@code Class.forName}, which accepts a {@code null} ClassLoader
-	 * reference as well).
-	 * @return the default ClassLoader (only {@code null} if even the system
-	 * ClassLoader isn't accessible)
+	 * <hr><blockquote><pre>
+	 * Java中的类加载机制是双亲委派模型，即按照AppClassLoader → SystemClassLoader → BootstrapClassLoader 的顺序，子ClassLoader将一个类加载的任务委托给父ClassLoader（父ClassLoader会再委托给父的父ClassLoader）来完成，只有父ClassLoader无法完成该类的加载时，子ClassLoader才会尝试自己去加载该类。所以越基础的类由越上层的ClassLoader进行加载，但如果基础类又要调用回用户的代码，那该怎么办？
+	 *
+	 * 为了解决这个问题，Java设计团队只好引入了一个不太优雅的设计：Thread ContextClassLoader（线程上下文类加载器）。这个ClassLoader可以通过 java.lang.Thread类的setContextClassLoaser()方法进行设置；如果创建线程时没有设置，则它会从父线程中继承（见以下Thread的源码）；如果在应用程序的全局范围内都没有设置过的话，那这个类加载器默认为AppClassLoader（见以下代码验证）。
+	 * </pre></blockquote><hr>
+	 * <a href="https://www.cnblogs.com/guiblog/p/14244064.html">new Thread().contextClassLoader被赋值的时机1</a>
+	 * <br>
+	 * <a href="https://yiyan.baidu.com/share/8TvFciAb9G">new Thread().contextClassLoader被赋值的时机2</a>
+	 * <br>
+	 * <a href="https://blog.csdn.net/qq_42305209/article/details/104278714">JVM类加载机制详解</a>
+	 * <br>
+	 * by Boyd.Du 2024-08-29 18:37
 	 * @see Thread#getContextClassLoader()
 	 * @see ClassLoader#getSystemClassLoader()
 	 */

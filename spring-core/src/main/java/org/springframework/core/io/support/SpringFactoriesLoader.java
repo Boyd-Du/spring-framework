@@ -201,6 +201,7 @@ public class SpringFactoriesLoader {
 		List<String> implementationNames = loadFactoryNames(factoryType);
 		logger.trace(LogMessage.format("Loaded [%s] names: %s", factoryType.getName(), implementationNames));
 		List<T> result = new ArrayList<>(implementationNames.size());
+		// Spring框架异常处理器(用函数式接口实现)
 		FailureHandler failureHandlerToUse = (failureHandler != null) ? failureHandler : THROWING_FAILURE_HANDLER;
 		for (String implementationName : implementationNames) {
 			T factory = instantiateFactory(implementationName, factoryType, argumentResolver, failureHandlerToUse);
@@ -320,6 +321,7 @@ public class SpringFactoriesLoader {
 	 * @param resourceLocation the resource location to look for factories
 	 * @param classLoader the ClassLoader to use for loading resources;
 	 * can be {@code null} to use the default
+	 * @Boyd.Du: 获取并存储资源类加载器和资源位置映射关系
 	 * @return a {@link SpringFactoriesLoader} instance
 	 * @since 6.0
 	 * @see #forResourceLocation(String)
@@ -328,12 +330,19 @@ public class SpringFactoriesLoader {
 		Assert.hasText(resourceLocation, "'resourceLocation' must not be empty");
 		ClassLoader resourceClassLoader = (classLoader != null ? classLoader :
 				SpringFactoriesLoader.class.getClassLoader());
+		// 新用法:没用过这个map.computeIfAbsent方法,而且是连续两层的computeIfAbsent用法,以后可以多用用,可以节省一些代码量
 		Map<String, SpringFactoriesLoader> loaders = cache.computeIfAbsent(
 				resourceClassLoader, key -> new ConcurrentReferenceHashMap<>());
 		return loaders.computeIfAbsent(resourceLocation, key ->
 				new SpringFactoriesLoader(classLoader, loadFactoriesResource(resourceClassLoader, resourceLocation)));
 	}
 
+	/**
+	 * @Boyd  加载配置文件中的工厂资源
+	 * @param classLoader
+	 * @param resourceLocation
+	 * @return
+	 */
 	protected static Map<String, List<String>> loadFactoriesResource(ClassLoader classLoader, String resourceLocation) {
 		Map<String, List<String>> result = new LinkedHashMap<>();
 		try {
