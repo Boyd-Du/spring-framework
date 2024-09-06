@@ -643,6 +643,11 @@ public class SpringFactoriesLoader {
 		 * @see #throwing(BiFunction)
 		 */
 		static FailureHandler throwing() {
+			// 三层Lambda表达式嵌套,总共使用了三和JDK定义的函数式接口BiFunction<T, U, R>(有入参T, U 有返回值R),
+			// BiConsumer<T, U>(有入参T, U 无返回值), Supplier<T>(无入参 有返回值T)
+			// 和一个SpringBoot自定义函数式接口FailureHandler
+			// 其实就是相当于定义三个方法,每个方法只干一件事,职责划分比较清晰,只不过是用函数式接口的Lambda表达式实现,代码看起来不太好理解
+			// TODO 这里非用函数式接口实现的目的是啥?作者编码习惯?代码看起来更加简洁?有特殊作用?
 			return throwing(IllegalArgumentException::new);
 		}
 
@@ -676,6 +681,7 @@ public class SpringFactoriesLoader {
 		 */
 		static FailureHandler handleMessage(BiConsumer<Supplier<String>, Throwable> messageHandler) {
 			return (factoryType, factoryImplementationName, failure) -> {
+				// 该Lambda表达式实际调用在第657行messageSupplier.get()
 				Supplier<String> messageSupplier = () -> "Unable to instantiate factory class [%s] for factory type [%s]"
 						.formatted(factoryImplementationName, factoryType.getName());
 				messageHandler.accept(messageSupplier, failure);
