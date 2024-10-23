@@ -264,6 +264,7 @@ class ConfigurationClassParser {
 		try {
 			sourceClass = asSourceClass(configClass, filter);
 			do {
+				// 真正干活解析Springboot注解标识的配置类
 				sourceClass = doProcessConfigurationClass(configClass, sourceClass, filter);
 			}
 			while (sourceClass != null);
