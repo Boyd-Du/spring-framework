@@ -27,8 +27,11 @@ import org.springframework.lang.Nullable;
  * Central interface to provide configuration for an application.
  * This is read-only while the application is running, but may be
  * reloaded if the implementation supports this.
- *
- * <p>An ApplicationContext provides:
+ * <p><br>
+ * ApplicationContext:为应用程序提供配置的中央接口。把一个springboot应用程序类比成一篇文章,<br>
+ * 那么ApplicationContext就是这篇文章中某些词句的上文或者下文,所以叫做应用程序上下文<br>
+ * <font color='red'>by Boyd.Du 2024-11-07 20:23 下午</font>
+ * <p><br>An ApplicationContext provides:
  * <ul>
  * <li>Bean factory methods for accessing application components.
  * Inherited from {@link org.springframework.beans.factory.ListableBeanFactory}.
@@ -54,6 +57,7 @@ import org.springframework.lang.Nullable;
  * @see ConfigurableApplicationContext
  * @see org.springframework.beans.factory.BeanFactory
  * @see org.springframework.core.io.ResourceLoader
+ *
  */
 public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory,
 		MessageSource, ApplicationEventPublisher, ResourcePatternResolver {
