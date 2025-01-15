@@ -28,9 +28,11 @@ import org.springframework.lang.Nullable;
  * This is read-only while the application is running, but may be
  * reloaded if the implementation supports this.
  * <p><br>
+ * <font color='red'>
+ * <a href="https://blog.csdn.net/JavaObjects/article/details/145132207?sharetype=blogdetail&sharerId=145132207&sharerefer=PC&sharesource=JavaObjects&spm=1011.2480.3001.8118">springboot中ApplicationContext接口体系简单了解</a><br>
  * ApplicationContext:为应用程序提供配置的中央接口。把一个springboot应用程序类比成一篇文章,<br>
  * 那么ApplicationContext就是这篇文章中某些词句的上文或者下文,所以叫做应用程序上下文<br>
- * <font color='red'>by Boyd.Du 2024-11-07 20:23 下午</font>
+ * by Boyd.Du 2024-11-07 20:23 下午</font>
  * <p><br>An ApplicationContext provides:
  * <ul>
  * <li>Bean factory methods for accessing application components.

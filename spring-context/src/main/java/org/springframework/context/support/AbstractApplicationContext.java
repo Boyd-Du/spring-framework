@@ -612,6 +612,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				beanPostProcess.end();
 
 				// Initialize message source for this context.
+				// 作用: https://yiyan.baidu.com/share/GKrDedOqiY?utm_invite_code=6HTzRhswzJHE%2FAHhN5mVdw%3D%3D&utm_name=YnJhdmVwcmVmYWI%3D&utm_fission_type=common
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
