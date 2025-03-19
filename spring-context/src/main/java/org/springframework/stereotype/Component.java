@@ -67,6 +67,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Indexed
+/**
+ * 类级别注解,单纯创建组件,不定义bean,即不给bean内属性赋值
+ */
 public @interface Component {
 
 	/**

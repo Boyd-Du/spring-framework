@@ -215,6 +215,9 @@ import org.springframework.core.annotation.AliasFor;
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * 方法级别注解,创建组件的同时,定义bean,即给bean赋值
+ */
 public @interface Bean {
 
 	/**

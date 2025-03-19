@@ -29,6 +29,10 @@ import java.util.function.Consumer;
  * it is interested in. When registered with a Spring {@code ApplicationContext},
  * events will be filtered accordingly, with the listener getting invoked for
  * matching event objects only.
+ * <p><font color='red'>
+ *  <a href="https://blog.csdn.net/JavaObjects/article/details/145174406?sharetype=blogdetail&sharerId=145174406&sharerefer=PC&sharesource=JavaObjects&spm=1011.2480.3001.8118">springboot中ApplicationListener和SpringApplicationRunListener作用,区别,联系</a><br>
+ *  by Boyd.Du 2024-01-16 10:04 上午</font>
+ *  <p><br>
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
